@@ -1,7 +1,7 @@
 Операционные системы и виртуализация (Linux)
 
 1. Использование команды cat в Linux:
-  - Создать два текстовых файла: "Animals.Pets.Pets"(Домашние животные) и "Pack animals"(вьючные животные),
+  - Создать два текстовых файла: "Pets"(Домашние животные) и "Pack animals"(вьючные животные),
   используя команду `cat` в терминале Linux. В первом файле перечислить собак, кошек и хомяков.
   Во втором — лошадей, верблюдов и ослов.
 
@@ -61,7 +61,7 @@ alex@alex-VirtualBox:~$ sudo dpkg -r mysql-apt-config
 
 6. Диаграмма классов
    - Создать диаграмму классов с родительским классом "Животные", и двумя подклассами: "Animals.Pets.Pets" и "Pack animals".
-В составы классов которых в случае Animals.Pets.Pets войдут классы: собаки, кошки, хомяки, а в класс Pack animals войдут:
+В составы классов которых в случае Pets войдут классы: собаки, кошки, хомяки, а в класс Pack animals войдут:
 Лошади, верблюды и ослы).
 Каждый тип животных будет характеризоваться (например, имена, даты рождения, выполняемые команды и т.д)
 Диаграмму можно нарисовать в любом редакторе, такими как Lucidchart, Draw.io, Microsoft Visio и других.
@@ -71,7 +71,7 @@ alex@alex-VirtualBox:~$ sudo dpkg -r mysql-apt-config
 
 7.1. После создания диаграммы классов в 6 пункте, в 7 пункте база данных "Human Friends"
 должна быть структурирована в соответствии с этой диаграммой. Например, можно создать таблицы,
-которые будут соответствовать классам "Animals.Pets.Pets" и "Pack animals", и в этих таблицах будут поля,
+которые будут соответствовать классам "Pets" и "Pack animals", и в этих таблицах будут поля,
 которые характеризуют каждый тип животных (например, имена, даты рождения, выполняемые команды и т.д.).
 
 7.2   - В ранее подключенном MySQL создать базу данных с названием "Human Friends".
@@ -81,14 +81,14 @@ mysql> USE HumanFriends;
 
   - Создать таблицы, соответствующие иерархии из вашей диаграммы классов:
 
-mysql> CREATE TABLE Animals.Pets.Pets (
+mysql> CREATE TABLE Pets (
            ID INT PRIMARY KEY AUTO_INCREMENT,
            Name VARCHAR(50),
            Type VARCHAR(20),
            BirthDate DATE,
            Commands VARCHAR(255)
        );
-mysql> CREATE TABLE Animals.PackAnimals.PackAnimals.Animals.PackAnimals.PackAnimals (
+mysql> CREATE TABLE PackAnimals (
            ID INT PRIMARY KEY AUTO_INCREMENT,
            Name VARCHAR(50),
            Type VARCHAR(20),
