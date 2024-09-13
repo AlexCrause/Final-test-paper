@@ -1,0 +1,161 @@
+Операционные системы и виртуализация (Linux)
+
+1. Использование команды cat в Linux:
+  - Создать два текстовых файла: "Pets"(Домашние животные) и "Pack animals"(вьючные животные),
+  используя команду `cat` в терминале Linux. В первом файле перечислить собак, кошек и хомяков.
+  Во втором — лошадей, верблюдов и ослов.
+
+alex@alex-VirtualBox:~$ cat > Pets.txt
+Собака
+Кошка
+Хомяк
+
+alex@alex-VirtualBox:~$ cat > PackAnimals.txt 
+Лошадь
+Верблюд
+Осел
+
+
+  - Объединить содержимое этих двух файлов в один и просмотреть его содержимое.
+
+alex@alex-VirtualBox:~$ cat Pets.txt PackAnimals.txt > Animals.txt
+alex@alex-VirtualBox:~$ cat Animals.txt
+Собака
+Кошка
+Хомяк
+Лошадь
+Верблюд
+Осёл
+
+  - Переименовать получившийся файл в "Human Friends"
+
+alex@alex-VirtualBox:~$ mv Animals.txt HumanFriends.txt
+
+
+2. Работа с директориями в Linux
+   - Создать новую директорию и переместить туда файл "Human Friends".
+
+alex@alex-VirtualBox:~$ mkdir HumanFriendsDir
+alex@alex-VirtualBox:~$ mv HumanFriends.txt HumanFriendsDir/
+
+
+3. Работа с MySQL в Linux. “Установить MySQL на вашу вычислительную машину ”
+   - Подключить дополнительный репозиторий MySQL и установить один из пакетов из этого репозитория.
+
+alex@alex-VirtualBox:~$ wget https://dev.mysql.com/get/mysql-apt-config_0.8.32-1_all.deb
+alex@alex-VirtualBox:~$ sudo dpkg -i mysql-apt-config_0.8.32-1_all.deb
+alex@alex-VirtualBox:~$ sudo apt update
+alex@alex-VirtualBox:~$ sudo apt install mysql-server
+alex@alex-VirtualBox:~$ sudo apt install mysql-workbench-community
+
+4. Управление deb-пакетами
+   - Установить и затем удалить deb-пакет, используя команду `dpkg`.
+
+alex@alex-VirtualBox:~$ wget https://dev.mysql.com/get/mysql-apt-config_0.8.32-1_all.deb
+alex@alex-VirtualBox:~$ sudo dpkg -i mysql-apt-config_0.8.32-1_all.deb
+alex@alex-VirtualBox:~$ sudo dpkg -r mysql-apt-config
+
+
+
+Объектно-ориентированное программирование
+
+6. Диаграмма классов
+   - Создать диаграмму классов с родительским классом "Животные", и двумя подклассами: "Pets" и "Pack animals".
+В составы классов которых в случае Pets войдут классы: собаки, кошки, хомяки, а в класс Pack animals войдут:
+Лошади, верблюды и ослы).
+Каждый тип животных будет характеризоваться (например, имена, даты рождения, выполняемые команды и т.д)
+Диаграмму можно нарисовать в любом редакторе, такими как Lucidchart, Draw.io, Microsoft Visio и других.
+
+7. Работа с MySQL (Задача выполняется в случае успешного выполнения задачи “Работа с MySQL в Linux.
+“Установить MySQL на вашу машину”
+
+7.1. После создания диаграммы классов в 6 пункте, в 7 пункте база данных "Human Friends"
+должна быть структурирована в соответствии с этой диаграммой. Например, можно создать таблицы,
+которые будут соответствовать классам "Pets" и "Pack animals", и в этих таблицах будут поля,
+которые характеризуют каждый тип животных (например, имена, даты рождения, выполняемые команды и т.д.).
+
+7.2   - В ранее подключенном MySQL создать базу данных с названием "Human Friends".
+
+mysql> CREATE DATABASE HumanFriends;
+mysql> USE HumanFriends;
+
+  - Создать таблицы, соответствующие иерархии из вашей диаграммы классов:
+
+mysql> CREATE TABLE Pets (
+           ID INT PRIMARY KEY AUTO_INCREMENT,
+           Name VARCHAR(50),
+           Type VARCHAR(20),
+           BirthDate DATE,
+           Commands VARCHAR(255)
+       );
+mysql> CREATE TABLE PackAnimals (
+           ID INT PRIMARY KEY AUTO_INCREMENT,
+           Name VARCHAR(50),
+           Type VARCHAR(20),
+           BirthDate DATE,
+           Commands VARCHAR(255)
+       );
+
+ - Заполнить таблицы данными о животных, их командах и датами рождения:
+
+mysql> INSERT INTO Pets (Name, Type, BirthDate, Commands)
+       VALUES
+       ('Fido', 'Dog', '2020-01-01', 'Sit, Stay, Fetch'),
+       ('Whiskers', 'Cat', '2019-05-15', 'Sit, Pounce'),
+       ('Hammy', 'Hamster', '2021-03-10', 'Roll, Hide'),
+       ('Buddy', 'Dog', '2018-12-10', 'Sit, Paw, Bark'),
+       ('Smudge', 'Cat', '2020-02-20', 'Sit, Pounce, Scratch'),
+       ('Peanut', 'Hamster', '2021-08-01', 'Roll, Spin'),
+       ('Bella', 'Dog', '2019-11-11', 'Sit, Stay, Roll'),
+       ('Oliver', 'Cat', '2020-06-30', 'Meow, Scratch, Jump');
+
+mysql> INSERT INTO PackAnimals (Name, Type, BirthDate, Commands)
+       VALUES
+       ('Thunder', 'Horse', '2015-07-21', 'Trot, Canter, Gallop'),
+       ('Sandy', 'Camel', '2016-11-03', 'Walk, Carry Load'),
+       ('Eeyore', 'Donkey', '2017-09-18', 'Walk, Carry Load, Bray'),
+       ('Storm', 'Horse', '2014-05-05', 'Trot, Canter'),
+       ('Dune', 'Camel', '2018-12-12', 'Walk, Sit'),
+       ('Burro', 'Donkey', '2019-01-23', 'Walk, Bray, Kick'),
+       ('Blaze', 'Horse', '2016-02-29', 'Trot, Jump, Gallop'),
+       ('Sahara', 'Camel', '2015-08-14', 'Walk, Run');
+
+ - Удалить записи о верблюдах и объединить таблицы лошадей и ослов:
+
+mysql> DELETE FROM PackAnimals WHERE Type = 'Camel';
+mysql> CREATE TABLE HorsesAndDonkeys AS
+       SELECT * FROM PackAnimals WHERE Type IN ('Horse', 'Donkey');
+
+ - Создать новую таблицу для животных в возрасте от 1 до 3 лет и вычислить их возраст с точностью до месяца.
+
+mysql> CREATE TABLE YoungAnimals AS
+       SELECT *,
+              TIMESTAMPDIFF(MONTH, BirthDate, CURDATE()) AS AgeInMonths
+       FROM Pets
+       WHERE TIMESTAMPDIFF(MONTH, BirthDate, CURDATE()) BETWEEN 12 AND 36
+       UNION
+       SELECT *,
+              TIMESTAMPDIFF(MONTH, BirthDate, CURDATE()) AS AgeInMonths
+       FROM PackAnimals
+       WHERE TIMESTAMPDIFF(MONTH, BirthDate, CURDATE()) BETWEEN 12 AND 36;
+
+
+ - Объединить все созданные таблицы в одну, сохраняя информацию о принадлежности к исходным таблицам.
+
+mysql> CREATE TABLE AllAnimals AS
+       SELECT 'Pets' AS SourceTable, ID, Name, Type, BirthDate, Commands
+       FROM Pets
+       UNION
+       SELECT 'PackAnimals' AS SourceTable, ID, Name, Type, BirthDate, Commands
+       FROM PackAnimals
+       UNION
+       SELECT 'HorsesAndDonkeys' AS SourceTable, ID, Name, Type, BirthDate, Commands
+       FROM HorsesAndDonkeys
+       UNION
+       SELECT 'YoungAnimals' AS SourceTable, ID, Name, Type, BirthDate, Commands
+       FROM YoungAnimals;
+
+
+
+
+
